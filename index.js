@@ -9,7 +9,7 @@ const today = new Date().toISOString();
 
 // Express
 const app = express();
-const port = 3001;
+const PORT = process.env.PORT || 3001;
 
 // Route Protection needs debugging and activation below
 const whiteList = [
@@ -55,8 +55,8 @@ app.get("/", (request, response) =>
   response.json({ success: `you are on main index` })
 );
 
-app.listen(port, () =>
-  console.log(`evil hacks running on port ${port} on ${today}`)
+app.listen(PORT, () =>
+  console.log(`evil hacks running on PORT ${PORT} on ${today}`)
 );
 
 app.use("/weather", weather);
