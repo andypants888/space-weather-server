@@ -1,7 +1,8 @@
 import dotenv from "dotenv";
 import express from "express";
-import cors from "cors";
+// import cors from "cors";
 import weather from "./weather/index.js";
+import flux from "./flux/index.js";
 import rateLimit from "express-rate-limit";
 
 // Date
@@ -19,18 +20,20 @@ const whiteList = [
   "http://127.0.0.1:3001",
   "https://expspaceweather.com/weather",
 ];
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || whiteList.indexOf(origin) !== -1) {
-      callback(null, true);
-      console.log('normal callback');
-    } else {
-      callback(new Error("not allowed by CORS"));
-      console.log('error');
-    }
-  },
-  optionsSuccessStatus: 200
-};
+
+// Need to Fix this later
+// const corsOptions = {
+//   origin: (origin, callback) => {
+//     if (!origin || whiteList.indexOf(origin) !== -1) {
+//       callback(null, true);
+//       console.log("normal callback");
+//     } else {
+//       callback(new Error("not allowed by CORS"));
+//       console.log("error");
+//     }
+//   },
+//   optionsSuccessStatus: 200,
+// };
 
 // End of buggy code
 
@@ -39,13 +42,12 @@ const limiter = rateLimit({
   max: 1,
 });
 
-
 app.use(limiter);
 dotenv.config();
 
 app.use(express.json());
 
-app.use(cors());
+// app.use(cors());
 
 // Active to disable non-cors from accessing. Needs debugging.
 // app.use(cors(corsOptions));
@@ -56,7 +58,8 @@ app.get("/", (request, response) =>
 );
 
 app.listen(PORT, () =>
-  console.log(`evil hacks running on PORT ${PORT} on ${today}`)
+  console.log(`evil hacks running on localhost ${PORT} on ${today}`)
 );
 
 app.use("/weather", weather);
+app.use("/flux", flux);

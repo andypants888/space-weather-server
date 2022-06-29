@@ -29,7 +29,8 @@ const fetchSpaceWeather = async () => {
 router.get("/", async (req, res) => {
   //   res.json({ success: `today: ${today}` });
   const data = await fetchSpaceWeather();
-  console.log(data);
+
+  // console.log(data);
   res.json(data);
 });
 
