@@ -1,10 +1,7 @@
 import express from "express";
-
-// const fetch = require("node-fetch");
 import fetch from "node-fetch";
 
 const router = express.Router();
-
 const fetchSpaceWeather = async () => {
   // End Date == Today!
   // Testing Historical Weather Events
@@ -19,6 +16,7 @@ const fetchSpaceWeather = async () => {
   try {
     const weatherStream = await fetch(endpoint);
     const weatherJSON = await weatherStream.json();
+    // Simple Historical Test
     // console.log("testEndDate: ", testDate);
     return weatherJSON;
   } catch (err) {
@@ -27,9 +25,8 @@ const fetchSpaceWeather = async () => {
 };
 
 router.get("/", async (req, res) => {
-  //   res.json({ success: `today: ${today}` });
   const data = await fetchSpaceWeather();
-
+  // Simple NASA Data Check
   // console.log(data);
   res.json(data);
 });
