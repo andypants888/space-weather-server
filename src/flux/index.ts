@@ -5,8 +5,6 @@ const router = express.Router();
 async function main() {
   const uri = `mongodb+srv://spaceweather:${process.env.MONGO_PASSWORD}@cluster0.ya4xd.mongodb.net/?retryWrites=true&w=majority`;
   const client = new MongoClient(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
     serverApi: ServerApiVersion.v1,
   });
   let results;
