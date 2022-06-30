@@ -10,6 +10,7 @@ async function main() {
     useUnifiedTopology: true,
     serverApi: ServerApiVersion.v1,
   });
+  let results;
   try {
     // Connect to the MongoDB cluster
     await client.connect();
@@ -24,15 +25,16 @@ async function main() {
       .limit(4);
     // .find({ scrape_time: new Date("2022-01-26T07:01:20.276+00:00") });
 
-    let results = await cursor.toArray();
-    console.log(results);
-    // Make the appropriate DB calls
-    await listDatabases(client);
+    results = await cursor.toArray();
+    // console.log(results);
+
+    // await listDatabases(client);
   } catch (e) {
     console.error(e);
   } finally {
     await client.close();
   }
+  return results;
 }
 
 async function listDatabases(client) {
@@ -43,9 +45,10 @@ async function listDatabases(client) {
 // main().catch(console.error);
 router.get("/", async (req, res) => {
   const testString = "flux data incoming";
-  const data = main().catch(console.error);
+  const data = await main().catch(console.error);
   // res.json(data);
-  res.json(testString);
+  console.log("data\n", data);
+  res.json(data);
 });
 
 export default router;
