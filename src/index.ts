@@ -17,8 +17,25 @@ const limiter = rateLimit({
   max: 1,
 });
 
-// cors
-app.use(cors());
+// CORS
+const allowList = [
+  "http://127.0.0.1/",
+  "http://localhost/",
+  "https://www.expspaceweather.com/",
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowList.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 //initiate
 app.use(limiter);
 app.use(express.json());
