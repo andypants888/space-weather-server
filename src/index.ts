@@ -3,6 +3,7 @@ import express from "express";
 import weather from "./weather/index.js";
 import flux from "./flux/index.js";
 import rateLimit from "express-rate-limit";
+import cors from "cors";
 
 // Date
 const today = new Date().toISOString();
@@ -16,7 +17,9 @@ const limiter = rateLimit({
   max: 1,
 });
 
-// dotenv.config();
+// cors
+app.use(cors());
+//initiate
 app.use(limiter);
 app.use(express.json());
 
