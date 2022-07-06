@@ -17,6 +17,7 @@ const limiter = rateLimit({
 const allowList = [
     "http://127.0.0.1/",
     "http://localhost/",
+    "http://localhost:3000",
     "https://www.expspaceweather.com/",
 ];
 const corsOptions = {
@@ -30,7 +31,7 @@ const corsOptions = {
     },
     optionsSuccessStatus: 200,
 };
-app.use(cors(corsOptions));
+app.use(cors());
 //initiate
 app.use(limiter);
 app.use(express.json());
