@@ -36,7 +36,7 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
-app.use(cors(corsOptions));
+app.use(cors());
 //initiate
 app.use(limiter);
 app.use(express.json());
