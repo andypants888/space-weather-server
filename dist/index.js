@@ -18,7 +18,7 @@ const allowList = [
     "http://127.0.0.1/",
     "http://localhost/",
     "http://localhost:3000",
-    "https://www.expspaceweather.com/",
+    "https://www.expspaceweather.com/weather",
 ];
 const corsOptions = {
     origin: (origin, callback) => {
